@@ -16,6 +16,7 @@ export const theme: DefaultTheme = {
       950: '#020617',
     },
     transparent: 'transparent',
+    cardBackground: '#fff',
   },
   fonts: {
     rubik: 'Rubik Variable',
