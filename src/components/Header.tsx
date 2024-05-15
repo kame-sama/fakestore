@@ -27,7 +27,7 @@ const Accent = styled.span`
   font-weight: 900;
 `;
 
-export default function Header() {
+export default function Header({ bagItemsCount }: { bagItemsCount: number }) {
   return (
     <header>
       <HeaderContainer>
@@ -36,7 +36,7 @@ export default function Header() {
         </Logo>
         <NavBar>
           <StyledLink to="shop">Shop</StyledLink>
-          <StyledLink to="bag">Bag(0)</StyledLink>
+          <StyledLink to="bag">Bag({bagItemsCount})</StyledLink>
         </NavBar>
       </HeaderContainer>
     </header>

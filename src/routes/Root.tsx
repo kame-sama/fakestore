@@ -16,10 +16,14 @@ export async function loader() {
 export default function Root() {
   const categories = useLoaderData() as string[];
   const [bagItems, setBagItems] = useState<BagItems>({});
+  let bagItemsCount = 0;
+  for (const item of Object.values(bagItems) as BagItem[]) {
+    bagItemsCount += item.quantity;
+  }
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Header />
+      <Header bagItemsCount={bagItemsCount} />
       <Outlet context={{ categories, bagItems, setBagItems }} />
     </ThemeProvider>
   );
