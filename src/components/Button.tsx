@@ -8,6 +8,7 @@ export const Button = styled.button<{ $icon?: boolean }>`
     $icon ? theme.colors.slate[950] : theme.colors.slate[50]};
   padding: ${({ $icon }) => ($icon ? '0.5rem' : '0.5rem 1.75rem')};
   border-radius: 5px;
+  text-decoration: none;
 
   &:hover {
     background-color: ${({ $icon }) =>
