@@ -1,4 +1,4 @@
-import { useOutletContext, Form } from 'react-router-dom';
+import { useOutletContext, Form, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container } from '../components/Container';
 import { Button } from '../components/Button';
@@ -66,98 +66,126 @@ const Total = styled(Price)`
   font-weight: 600;
 `;
 
+const Placeholder = styled.div`
+  justify-self: center;
+  align-self: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PlaceholderTitle = styled(Total)`
+  color: ${({ theme }) => theme.colors.slate[600]};
+`;
+
+const PlaceholderButton = styled(Button)`
+  text-decoration: none;
+`;
+
 export default function Bag() {
   const { bagItems, setBagItems } = useOutletContext() as RootContext;
   const total = Object.values(bagItems).reduce(
     (acc: number, item: BagItem) => acc + item.price * item.quantity,
     0,
   );
-  return (
-    <BagContainer>
-      <ul>
-        {Object.values(bagItems).map((item: BagItem) => (
-          <ItemWrapper key={item.id}>
-            <Img src={item.image} alt={item.title} />
+  const itemList = Object.values(bagItems).map((item: BagItem) => (
+    <ItemWrapper key={item.id}>
+      <Img src={item.image} alt={item.title} />
 
-            <Title>{item.title}</Title>
-            <ControlsWrapper>
-              <div>
-                <Button
-                  $icon
-                  onClick={() => {
-                    setBagItems((prev) => {
-                      const quantity =
-                        prev[item.id].quantity -
-                        (prev[item.id].quantity > 1 ? 1 : 0);
-                      return {
-                        ...prev,
-                        [item.id]: { ...item, quantity },
-                      };
-                    });
-                  }}
-                >
-                  -
-                </Button>
-                <Input
-                  $quantity
-                  value={item.quantity}
-                  onChange={(e) => {
-                    setBagItems((prev) => {
-                      const val = parseInt(e.target.value);
-                      const quantity = !Number.isNaN(val) && val > 0 ? val : 1;
-                      return { ...prev, [item.id]: { ...item, quantity } };
-                    });
-                  }}
-                />
-                <Button
-                  $icon
-                  onClick={() => {
-                    setBagItems((prev) => {
-                      const quantity = (prev[item.id]?.quantity || 0) + 1;
-                      return {
-                        ...prev,
-                        [item.id]: { ...item, quantity },
-                      };
-                    });
-                  }}
-                >
-                  +
-                </Button>
-              </div>
-              <Button
-                onClick={() => {
-                  setBagItems((prev) => {
-                    const next = Object.assign({}, prev);
-                    delete next[item.id];
-                    return next;
-                  });
-                }}
-              >
-                Remove
-              </Button>
-              <Price>{`${item.price} USD`}</Price>
-            </ControlsWrapper>
-          </ItemWrapper>
-        ))}
-      </ul>
-      <StyledForm method="GET" action="/">
-        <Label htmlFor="phone">Phone:</Label>
-        <Input
-          id="phone"
-          placeholder="Enter your phone number"
-          type="tel"
-          required
-        />
-        <Label htmlFor="email">Email:</Label>
-        <Input
-          id="email"
-          placeholder="Enter your email address"
-          type="email"
-          required
-        />
-        <Total>{`${total.toFixed(2)} USD`}</Total>
-        <Button type="submit">Checkout</Button>
-      </StyledForm>
-    </BagContainer>
+      <Title>{item.title}</Title>
+      <ControlsWrapper>
+        <div>
+          <Button
+            $icon
+            onClick={() => {
+              setBagItems((prev) => {
+                const quantity =
+                  prev[item.id].quantity - (prev[item.id].quantity > 1 ? 1 : 0);
+                return {
+                  ...prev,
+                  [item.id]: { ...item, quantity },
+                };
+              });
+            }}
+          >
+            -
+          </Button>
+          <Input
+            $quantity
+            value={item.quantity}
+            onChange={(e) => {
+              setBagItems((prev) => {
+                const val = parseInt(e.target.value);
+                const quantity = !Number.isNaN(val) && val > 0 ? val : 1;
+                return { ...prev, [item.id]: { ...item, quantity } };
+              });
+            }}
+          />
+          <Button
+            $icon
+            onClick={() => {
+              setBagItems((prev) => {
+                const quantity = (prev[item.id]?.quantity || 0) + 1;
+                return {
+                  ...prev,
+                  [item.id]: { ...item, quantity },
+                };
+              });
+            }}
+          >
+            +
+          </Button>
+        </div>
+        <Button
+          onClick={() => {
+            setBagItems((prev) => {
+              const next = Object.assign({}, prev);
+              delete next[item.id];
+              return next;
+            });
+          }}
+        >
+          Remove
+        </Button>
+        <Price>{`${item.price} USD`}</Price>
+      </ControlsWrapper>
+    </ItemWrapper>
+  ));
+  return (
+    <>
+      {itemList.length ? (
+        <BagContainer>
+          <ul>{itemList}</ul>
+          <StyledForm method="GET" action="/">
+            <Label htmlFor="phone">Phone:</Label>
+            <Input
+              id="phone"
+              placeholder="Enter your phone number"
+              type="tel"
+              required
+            />
+            <Label htmlFor="email">Email:</Label>
+            <Input
+              id="email"
+              placeholder="Enter your email address"
+              type="email"
+              required
+            />
+            <Total>{`${total.toFixed(2)} USD`}</Total>
+            <Button type="submit">Checkout</Button>
+          </StyledForm>
+        </BagContainer>
+      ) : (
+        <Placeholder>
+          <PlaceholderTitle>There is nothing here yet...</PlaceholderTitle>
+          <PlaceholderButton as={Link} to="/shop">
+            Start shopping
+          </PlaceholderButton>
+        </Placeholder>
+      )}
+    </>
   );
 }
