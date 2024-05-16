@@ -2,6 +2,7 @@ import {
   LoaderFunctionArgs,
   useLoaderData,
   useOutletContext,
+  redirect,
 } from 'react-router-dom';
 import styled from 'styled-components';
 import ShopNav from '../components/ShopNav';
@@ -15,8 +16,9 @@ const ShopContainer = styled(Container)`
 `;
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
+  if (request.url.slice(-5).includes('shop')) return redirect('/shop/all');
   let url: string;
-  if (request.url.slice(-5).includes('shop')) {
+  if (params.category === 'all') {
     url = 'https://fakestoreapi.com/products';
   } else {
     url = `https://fakestoreapi.com/products/category/${params.category}`;
