@@ -86,7 +86,9 @@ export default function Bag() {
                   $icon
                   onClick={() => {
                     setBagItems((prev) => {
-                      const quantity = (prev[item.id]?.quantity || 0) - 1;
+                      const quantity =
+                        prev[item.id].quantity -
+                        (prev[item.id].quantity > 1 ? 1 : 0);
                       return {
                         ...prev,
                         [item.id]: { ...item, quantity },
@@ -101,7 +103,8 @@ export default function Bag() {
                   value={item.quantity}
                   onChange={(e) => {
                     setBagItems((prev) => {
-                      const quantity = parseInt(e.target.value);
+                      const val = parseInt(e.target.value);
+                      const quantity = !Number.isNaN(val) && val > 0 ? val : 1;
                       return { ...prev, [item.id]: { ...item, quantity } };
                     });
                   }}

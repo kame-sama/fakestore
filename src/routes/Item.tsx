@@ -66,7 +66,10 @@ export default function Item() {
               $quantity
               value={quantity}
               type="number"
-              onChange={(e) => setQuantity(parseInt(e.target.value))}
+              onChange={(e) => {
+                const val = parseInt(e.target.value);
+                setQuantity(!Number.isNaN(val) && val > 0 ? val : 1);
+              }}
             />
             <Button $icon onClick={() => setQuantity((prev) => prev + 1)}>
               +
