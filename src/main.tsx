@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@fontsource-variable/rubik';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Root, { loader as rootLoader } from './routes/Root';
 import Shop, { loader as shopLoader } from './routes/Shop';
 import Item, { loader as itemLoader } from './routes/Item';
 import Bag from './routes/Bag';
 import Hero from './components/Hero';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     loader: rootLoader,
