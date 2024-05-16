@@ -24,7 +24,9 @@ export default function Root() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header bagItemsCount={bagItemsCount} />
-      <Outlet context={{ categories, bagItems, setBagItems }} />
+      <main>
+        <Outlet context={{ categories, bagItems, setBagItems }} />
+      </main>
     </ThemeProvider>
   );
 }

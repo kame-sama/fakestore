@@ -5,6 +5,7 @@ const ItemsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  height: 100%;
 `;
 
 const ItemWrapper = styled.div`

@@ -18,6 +18,7 @@ const StyledLink = styled(NavLink)`
 const NavBar = styled.nav`
   position: sticky;
   top: 1rem;
+  align-self: self-start;
 `;
 
 export default function ShopNav({ categories }: { categories: string[] }) {
