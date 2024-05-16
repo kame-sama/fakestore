@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '@fontsource-variable/rubik';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './styles/Theme';
+import { GlobalStyles } from './styles/Global';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Root, { loader as rootLoader } from './routes/Root';
 import Shop, { loader as shopLoader } from './routes/Shop';
 import Item, { loader as itemLoader } from './routes/Item';
 import Bag from './routes/Bag';
 import Hero from './components/Hero';
+import ErrorPage from './routes/ErrorPage';
 
 const router = createHashRouter([
   {
     path: '/',
     loader: rootLoader,
     element: <Root />,
-    errorElement: <h1>Something went wrong...</h1>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -44,6 +48,9 @@ const router = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 );

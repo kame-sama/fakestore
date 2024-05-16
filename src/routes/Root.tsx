@@ -1,6 +1,3 @@
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../styles/Theme';
-import { GlobalStyles } from '../styles/Global';
 import { Outlet, useLoaderData } from 'react-router-dom';
 import { useState } from 'react';
 import Header from '../components/Header';
@@ -21,12 +18,11 @@ export default function Root() {
     bagItemsCount += item.quantity;
   }
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
+    <>
       <Header bagItemsCount={bagItemsCount} />
       <main>
         <Outlet context={{ categories, bagItems, setBagItems }} />
       </main>
-    </ThemeProvider>
+    </>
   );
 }
