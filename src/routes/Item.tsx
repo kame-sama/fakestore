@@ -30,17 +30,6 @@ const ControlsWrapper = styled.div`
   gap: 2rem;
 `;
 
-const QuantityInput = styled(Input)`
-  width: 50px;
-  text-align: center;
-  appearance: textfield;
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-`;
-
 const Text = styled.p`
   max-width: 600px;
   text-wrap: balance;
@@ -73,7 +62,8 @@ export default function Item() {
             >
               -
             </Button>
-            <QuantityInput
+            <Input
+              $quantity
               value={quantity}
               type="number"
               onChange={(e) => setQuantity(parseInt(e.target.value))}
