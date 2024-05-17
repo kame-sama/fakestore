@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Input = styled.input<{ $quantity?: boolean }>`
-  font-size: 1.1rem;
   padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.slate[950]};

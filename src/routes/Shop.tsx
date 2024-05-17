@@ -10,12 +10,18 @@ import ShopNav from '../components/ShopNav';
 import ItemList from '../components/ItemList';
 import { Container } from '../components/Container';
 import { Loader } from '../components/Loader';
+import { device } from '../styles/Breakpoints';
 
 const ShopContainer = styled(Container)`
   display: grid;
   grid-template-columns: 150px 1fr;
   gap: 1rem;
   height: 100%;
+
+  @media ${device.md} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
 `;
 
 export async function loader({ params, request }: LoaderFunctionArgs) {

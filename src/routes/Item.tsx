@@ -8,15 +8,26 @@ import { useState } from 'react';
 import { Container } from '../components/Container';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
+import { device } from '../styles/Breakpoints';
 
 const ItemContainer = styled(Container)`
   display: grid;
   gap: 4rem;
   grid-template-columns: 1fr 2fr;
+
+  @media ${device.md} {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Img = styled.img`
   box-shadow: 2px 2px 5px ${({ theme }) => theme.colors.slate[500]};
+
+  @media ${device.md} {
+    max-width: 500px;
+    width: 100%;
+    justify-self: center;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -28,6 +39,10 @@ const ContentWrapper = styled.div`
 const ControlsWrapper = styled.div`
   display: flex;
   gap: 2rem;
+
+  @media ${device.md} {
+    justify-content: center;
+  }
 `;
 
 const Text = styled.p`

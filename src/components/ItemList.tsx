@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { device } from '../styles/Breakpoints';
 
 const ItemsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   height: 100%;
+
+  @media ${device.md} {
+    justify-content: center;
+  }
 `;
 
 const ItemWrapper = styled.div`

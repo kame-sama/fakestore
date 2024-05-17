@@ -3,11 +3,16 @@ import styled from 'styled-components';
 import { Container } from '../components/Container';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
+import { device } from '../styles/Breakpoints';
 
 const BagContainer = styled(Container)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+
+  @media ${device.md} {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ItemWrapper = styled.li`
@@ -22,6 +27,11 @@ const ItemWrapper = styled.li`
   & + & {
     margin-top: 1rem;
   }
+
+  @media ${device.sm} {
+    grid-template-columns: 100px 1fr;
+    grid-template-rows: repeat(2, auto);
+  }
 `;
 
 const ControlsWrapper = styled.div`
@@ -29,12 +39,23 @@ const ControlsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
+
+  @media ${device.sm} {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.875rem;
+  }
 `;
 
 const Img = styled.img`
   object-fit: contain;
   object-position: center;
   aspect-ratio: 1;
+
+  @media ${device.sm} {
+    grid-row: 1 / -1;
+  }
 `;
 
 const Title = styled.div`
@@ -45,6 +66,10 @@ const Title = styled.div`
 const Price = styled.div`
   text-align: right;
   font-size: 1.15rem;
+
+  @media ${device.sm} {
+    font-size: 1rem;
+  }
 `;
 
 const StyledForm = styled(Form)`
