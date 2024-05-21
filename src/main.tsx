@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '@fontsource-variable/rubik';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/Theme';
 import { GlobalStyles } from './styles/Global';
