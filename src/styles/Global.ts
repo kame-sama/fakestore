@@ -28,7 +28,7 @@ export const GlobalStyles = createGlobalStyle`
   canvas,
   svg {
     display: block;
-    max-inline-size: 100%;
+    inline-size: 100%;
     block-size: auto;
   }
 
